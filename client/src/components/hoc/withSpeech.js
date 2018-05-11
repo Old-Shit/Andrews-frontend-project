@@ -18,7 +18,7 @@ const mapDispatchToProps = {
   clearRegister,
 }
 
-const withSpeech = Comp => {
+const withSpeech = ({ component: Comp }) => {
   class WithSpeech extends Component {
 
     componentDidMount = () => {
@@ -48,7 +48,7 @@ const withSpeech = Comp => {
         .map(({ transcript }) => transcript)
         .join('')
 
-      if (e.results[0].isFinal)
+      // if (e.results[0].isFinal)
         // this.props.addToRegister(transcript)
     }
 
@@ -60,7 +60,7 @@ const withSpeech = Comp => {
   return connect(mapStateToProps, mapDispatchToProps)(WithSpeech)
 }
 
-const Speak = props => {
+export const Speak = props => {
   const { onSave } = props
 
   return (
@@ -77,4 +77,4 @@ const Speak = props => {
   )
 }
 
-export default withSpeech(connect(mapStateToProps, mapDispatchToProps)(Speak))
+export default connect(mapStateToProps, mapDispatchToProps)(withSpeech)
